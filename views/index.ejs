@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="main.css" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1 style="text-align: center;"><%= sendData.tournamentId.name%></h1>
+<h2 style="text-align: center;"><%= sendData.sportId.name  %> Scoresheet</h2>
+  
+
+<div class="container-fluid">
+  <div class="row noSpace">
+      <table class="table table-bordered noSpace">
+          <thead>
+            <tr>
+              <th>Round No.</th>
+              <th>Stadium</th>
+              <th>Winning Team</th>
+              <th>Toss</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><%= sendData.round  %></td>
+            <td><%= sendData.resourceId.name  %> </td>
+            <td><%= sendData.matchStatusInfo.winningTeam.name %></td>
+            <td><%= sendData.tossInfo.team.name%> , <%= sendData.tossInfo.decision %> </td>
+          </tr>
+          </tbody>
+             
+      </table>
+  </div>
+
+    <div class= "row noSpace" >
+      <div class="col-md-6 noSpace" >
+      <table class="table table-bordered noSpace">
+          <p class="teamName">Team 1 : <%= sendData.firstTeam.name%> </p>
+          <thead>
+            <tr>
+              <th>SrNo</th>
+              <th>Player Name</th>
+              <th>Jersey No.</th>
+            </tr>
+          </thead>
+          <tbody>
+              <% for(let ob in sendData.firstTeamInfo.playingList ) {%>
+                <tr>
+                  <td><%= Number(ob) + 1 %></td>
+                  <td><%= sendData.firstTeamInfo.playingList[ob].userid.fullname %></td>
+                  <td><%=sendData.firstTeamInfo.playingList[ob].jerseyNumber %></td>
+                </tr>
+                <% }%>
+                <tr> <td colspan="3" class="teamName">Team 1 subs</td></tr>
+                <% for(let ob in sendData.firstTeamInfo.playingListOffField ) {%>
+                  <tr>
+                    <td><%= Number(ob) + 1 %></td>
+                    <td><%= sendData.firstTeamInfo.playingListOffField[ob].userid.fullname %></td>
+                    <td><%=sendData.firstTeamInfo.playingListOffField[ob].jerseyNumber %></td>
+                  </tr>
+                  <% }%>
+          </tbody>
+      </table>
+      </div>
+      <div class="col-md-6 noSpace" >
+      <table class="table table-bordered">
+          <p class="teamName">Team 2 : <%= sendData.secondTeam.name%> </p>
+        <thead>
+          <tr>
+            <th>SrNo</th>
+            <th>Player Name</th>
+            <th>Jersey No.</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% for(let ob in sendData.secondTeamInfo.playingList ) {%>
+              <tr>
+                <td><%= Number(ob) + 1 %></td>
+                <td><%= sendData.secondTeamInfo.playingList[ob].userid.fullname %></td>
+                <td><%=sendData.secondTeamInfo.playingList[ob].jerseyNumber %></td>
+              </tr>
+              <% }%>
+              <tr> <td colspan="3" class="teamName">Team 2 subs</td></tr>
+              <% for(let ob in sendData.secondTeamInfo.playingListOffField ) {%>
+                <tr>
+                  <td><%= Number(ob) + 1 %></td>
+                  <td><%= sendData.secondTeamInfo.playingListOffField[ob].userid.fullname %></td>
+                  <td><%=sendData.secondTeamInfo.playingListOffField[ob].jerseyNumber %></td>
+                </tr>
+                <% }%>
+        </tbody>
+      </table>
+      </div>
+      </div>
+      <div class="row noSpace">
+          <div class="col-md-6 noSpace" >
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                  <th>Stats</th>
+                  <th>Team A</th>
+                  <th>Team B</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(let ob in sendData.summary ) {%>
+                <tr>
+                  <td><%= sendData.summary[ob].type.replace(/_/g, " ") %></td>
+                  <td><%= sendData.summary[ob].firstTeam %></td>
+                  <td><%= sendData.summary[ob].secondTeam %></td>
+                </tr>
+                <% }%>
+                
+              </tbody>
+        </table>
+      </div>
+      
+    </div>
+    <h4 style="font-weight:600">Match Winner: <%= sendData.derMessage %></h4>
+    </div>
+    
+</body>
+
+</html>
