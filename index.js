@@ -3,7 +3,6 @@ const express = require('express');
 
 const app = express();
 const fetch = require('node-fetch');
-var Request = require("request");
 const bodyPsrser = require('body-parser');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
